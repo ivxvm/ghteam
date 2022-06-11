@@ -1,46 +1,22 @@
-# Getting Started with Create React App
+# ghteam
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+Please create a React TypeScript app - "Create Your Engineering Team" - that allows you to:
 
-## Available Scripts
+- Pass a GitHub user name in a form.
+- Click on a button ‘Load User' next to the from.
+- Load the user from the GitHub API (https://docs.github.com/en/rest/users/users#get-a-user).
+- Display loaded users.
+- Remove loaded users.
+- Add a role to loaded users, e.g. "Frontend Engineer".
 
-In the project directory, you can run:
+- The app does not have to persist data when closing the tab.
+- The app does not need to have tests.
 
-### `npm start`
+## Solution overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To bootstrap app I used create-react-app with redux-toolkit and typescript template. RTK's `createSlice`, `createAction`, `createAsyncThunk` are used to define redux state tree, reducers, and actions / action creator for async thunk talking to API. I decided to choose `createAsyncThunk` over `redux-saga` or `RTK Query` because it's relatively powerful and also because there is just a single async request which doesn't even demand any special treatment. TypeScript-friendly versions of hooks `useDispatch` and `useSelector` are used in components to "talk" to redux. Project is structured using `feature-folders` approach, with some by-type grouping inside of feature folder. Styles are organized mostly using built-in CSS modules functionality (with role dropdown being exception because I use `react-select` library which is customized using inline CSS props). All components are functional components using hooks for state management, effects and synchronisation. LoadedUsersList component uses per-row render prop `renderExtras` for role dropdown, which isn't necessary for this simple app, but I wanted to showcase the approach (and also to remind myself how to do this).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can see app in action at https://ivxvm.github.io/ghteam/, if you want to run it yourself, clone repository, use `npm install` to install dependencies and then `npm start`, also make sure you have `.env` file at project root with github API token, like this:
+```
+REACT_APP_GITHUB_API_TOKEN = ghp_UEo2BYCcBbtU4cbG2okSZfWxzoUXa714lDyB
+```
