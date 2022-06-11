@@ -1,0 +1,13 @@
+.dropdown {
+    border: 0;
+    background-color: transparent;
+}
+
+.menuPortal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
